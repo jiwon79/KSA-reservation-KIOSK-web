@@ -1,0 +1,89 @@
+/* font */
+@font-face {
+    font-family: 'SpoqaHanSansNeo-Thin';
+    src: url('./../font/SpoqaHanSansNeo-Thin.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SpoqaHanSansNeo-Regular';
+    src: url('./../font/SpoqaHanSansNeo-Regular.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SpoqaHanSansNeo-Medium';
+    src: url('./../font/SpoqaHanSansNeo-Medium.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SpoqaHanSansNeo-Light';
+    src: url('./../font/SpoqaHanSansNeo-Light.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SpoqaHanSansNeo-Bold';
+    src: url('./../font/SpoqaHanSansNeo-Bold.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* index.html css */
+body {
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    background-color: #2F2F2F;
+    display: block;
+    font-family: 'SpoqaHanSansNeo-Light';
+}
+
+/* main */
+#main{
+    width: 100%;
+}
+
+#main_text{
+    width: 60%;
+    margin: 28% 20% 20% 20%;
+}
+
+#title {
+    width: 60%;
+    margin: 0 20% 2% 20%;
+}
+
+#name{
+    width: 31%;
+    margin: 15px 34.5% 17% 34.5%;
+}
+
+/* bottom menu */
+#menu {
+    display: inline;
+}
+
+#reserve {
+    width: 30%;
+    margin-left: 18%;
+}
+
+#cancel_reserve {
+    width: 30%;
+    margin-left: 4%;
+}
+
+/* footer img */
+img.home-img {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+
+    bottom: 15px;
+    right: 15px;
+}

@@ -1,0 +1,178 @@
+/* body */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #2F2F2F;
+    height: 100vh;
+}
+
+.reserveTable {
+    border: none;
+    /* border-collapse: collapse; */
+    margin: 0 auto;
+    width: 100%;
+    height: 65%;
+    font-size: 1.2em;
+    white-space: nowrap;
+}
+
+.reserveTable td {
+    border-left: 20px solid #ffffff;
+}
+
+.reserveTable tr:nth-child(1) td:nth-child(3) {
+    padding: 0;
+    text-align: center;
+}
+
+.reserveTable tr td:nth-child(3) {
+    padding-left: 30%;
+    text-align: left;
+}
+
+.reserveTable td, 
+.reserveTable tr {
+    text-align: center;
+    padding: 0;
+    border: none;
+}
+
+
+/* .reserveTable tr:nth-child(1) {
+    color: #ffffff;
+    background: #4FC3A1;
+}
+
+.reserveTable tr:nth-child(1) td:nth-child(odd) {
+    background: #324960;
+} */
+
+.reserveTable tr:nth-child(even) {
+    background: #f8f8f8;
+}
+
+/* table */
+.timeTable {
+    margin: 0 auto;
+}
+
+.timeTable {
+    border-collapse: collapse; 
+    border-spacing: 0;
+}
+
+.timeTable td {
+    width: 20px;
+    padding: 0;
+    border: 0;
+    text-align: center;
+}
+
+/* form */
+.center {
+    position: absolute;
+    width: 83%;
+    height: 80%;
+    top: 8%;
+    left: 50%;
+    background-color: white;
+    border-radius: 15px;
+    transform: translate(-50%, 0%);
+}
+
+.center h3 {
+    text-align: center;
+    padding: 10px 0 10px 0;
+    margin: 0;
+    background-color: coral;
+    color: #fff;
+    font-size: 40px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom: 1px solid silver;
+}
+
+.center form {
+    padding: 10px 40px;
+    box-sizing: border-box;
+}
+
+form .txt_field {
+    position: relative;
+    border-bottom: 2px solid #adadad;
+    margin: 50px 0;
+}
+
+.txt_field input {
+    width: 100%;
+    padding: 0px 5px;
+    height: 40px;
+    font-size: 28px;
+    border: none;
+    background: none;
+    outline: none;
+}
+
+.txt_field label{
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  color: #adadad;
+  transform: translateY(-60%);
+  font-size: 20px;
+  pointer-events: none;
+  transition: .5s;
+}
+
+.txt_field span::before{
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: #2691d9;
+    transition: .5s;
+}
+
+
+.txt_field input:focus ~ label,
+.txt_field input:valid ~ label{
+  top: -5px;
+  color: #2691d9;
+}
+
+.txt_field input:focus ~ span::before,
+.txt_field input:valid ~ span::before{
+  width: 100%;
+}
+
+input[type="checkbox"] {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+input[type="button"]{
+    width: 100%;
+    height: 80px;
+    border: 1px solid;
+    margin: 10px 0 20px 0;
+    background: #2691d9;
+    border-radius: 25px;
+    font-size: 30px;
+    color: #e9f4fb;
+    font-weight: 700;
+    cursor: pointer;
+    outline: none;
+}
+
+input[type="button"]:hover{
+    border-color: #2691d9;
+    transition: .5s;
+}
+
+.text {
+    margin: 152% 10% 0 10%;
+    width: 80%
+}

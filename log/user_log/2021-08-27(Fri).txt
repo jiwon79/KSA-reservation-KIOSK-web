@@ -1,0 +1,1 @@
+current time / stu_number / stu_name / phone number / option / seminar / time
