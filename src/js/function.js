@@ -1,6 +1,5 @@
-let fs = require('fs');
-let rootPath = require('electron-root-path').rootPath;
-const xlsxFile = require('read-excel-file/node');
+// let fs = require('fs');
+// let rootPath = require('electron-root-path').rootPath;
 
 // get today date return 2021-02-25(Thu)
 function getTodayDate() {
