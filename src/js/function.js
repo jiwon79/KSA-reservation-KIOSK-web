@@ -1,6 +1,3 @@
-// let fs = require('fs');
-// let rootPath = require('electron-root-path').rootPath;
-
 // get today date return 2021-02-25(Thu)
 function getTodayDate() {
     // Date 2021-02-25-17:45:34 Thu
@@ -99,41 +96,41 @@ function overallTable() {
 
 // create text file
 function createDayLogFile() {
-    d = getTodayDate();
-    textPath = rootPath+'/log/day_log/'+d+'.txt';
-    data = 'a : 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000\n'+
-            'b : 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000\n'+
-            'c : 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000\n'+
-            'd : 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000\n'+
-            'e : 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000';
-    
-    fs.writeFile(textPath, data, function(err) {
-        if(err) {
-            return console.log(err);
-        }
-        console.log("create empty day log file");
-    });
+  d = getTodayDate();
+  // textPath = rootPath+'/log/day_log/'+d+'.txt';
+  data = 'a : 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000\n'+
+          'b : 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000\n'+
+          'c : 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000\n'+
+          'd : 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000\n'+
+          'e : 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000';
+  localStorage['day_log/'+d] = data;
+  console.log('create empty day log')
+    // fs.writeFile(textPath, data, function(err) {
+    //     if(err) {
+    //         return console.log(err);
+    //     }
+    //     console.log("create empty day log file");
+    // });
 }
 
-function createUserLogFile() {
-    d = getTodayDate();
-    textPath = rootPath+'/log/user_log/'+d+'.txt';
-    data = 'current time / stu_number / stu_name / phone number / option / seminar / time';
+// function createUserLogFile() {
+//     d = getTodayDate();
+//     textPath = rootPath+'/log/user_log/'+d+'.txt';
+//     data = 'current time / stu_number / stu_name / phone number / option / seminar / time';
     
-    fs.writeFile(textPath, data, function(err) {
-        if(err) {
-            return console.log(err);
-        }
-        console.log("create empty user log file");
-    });
-}
+//     fs.writeFile(textPath, data, function(err) {
+//         if(err) {
+//             return console.log(err);
+//         }
+//         console.log("create empty user log file");
+//     });
+// }
 
 // read text file
 function loadDayLog() {
     d = getTodayDate();
-    textPath = rootPath+'/log/day_log/'+d+'.txt';
-
-    data = fs.readFileSync(textPath, {encoding: 'utf8'});
+    
+    data = localStorage['day_log/'+d]
     s = data.split('\n');
     var i = 0;
     for(key in roomList) {
@@ -147,7 +144,6 @@ function loadDayLog() {
 // if element == 1, change stu_number and save day log file
 function saveDayLogByArray(stu_number) {
     d = getTodayDate();
-    textPath = rootPath+'/log/day_log/'+d+'.txt';
     data = ''
     
     // if element == 1, change stu_number
@@ -163,34 +159,29 @@ function saveDayLogByArray(stu_number) {
     for(key in roomList) {
         data = data + key + ' : ' + roomList[key].join(', ') + '\n';
     }
-
-    fs.writeFile(textPath, data, function(err) {
-        if(err) {
-            return console.log(err);
-        }
-        console.log("save  day log file");
-    });
+    localStorage['day_log/'+d] = data;
+    console.log("sace day log")
 }
 
-function saveUserLog(option, name, number, tel, room, time) {
-    d = getTodayDate();
-    textPath = rootPath+'/log/user_log/'+d+'.txt';
-    data = fs.readFileSync(textPath, {encoding: 'utf8'});
+// function saveUserLog(option, name, number, tel, room, time) {
+//     d = getTodayDate();
+//     textPath = rootPath+'/log/user_log/'+d+'.txt';
+//     data = fs.readFileSync(textPath, {encoding: 'utf8'});
 
-    let today = new Date();   
-    let hours = today.getHours(); // 시
-    let minutes = today.getMinutes();  // 분
-    let seconds = today.getSeconds();  // 초
+//     let today = new Date();   
+//     let hours = today.getHours(); // 시
+//     let minutes = today.getMinutes();  // 분
+//     let seconds = today.getSeconds();  // 초
 
-    data = data + '\n' + hours + ':' + minutes + ':' + seconds;
-    data = data + ' ' + number + ' ' + name + ' ' + tel;
-    data = data + ' ' + option + ' ' + room + ' ' + time;
-    fs.writeFileSync(textPath, data, function(err) {
-        if(err) {
-            return console.log(err);
-        }
-    });
-}
+//     data = data + '\n' + hours + ':' + minutes + ':' + seconds;
+//     data = data + ' ' + number + ' ' + name + ' ' + tel;
+//     data = data + ' ' + option + ' ' + room + ' ' + time;
+//     fs.writeFileSync(textPath, data, function(err) {
+//         if(err) {
+//             return console.log(err);
+//         }
+//     });
+// }
 
 // output: 해당 학생이 예약한 시간 리스트
 function reserveTime(stu_number) {
@@ -285,7 +276,7 @@ function reservation() {
         
         for (i=0; i<checkList.length; i++) {
             roomList[checkList[i][0]][checkList[i][1]] = 1;
-            saveUserLog('reservation', stu_name, stu_number, stu_tel, checkList[i][0], checkList[i][1]);
+            // saveUserLog('reservation', stu_name, stu_number, stu_tel, checkList[i][0], checkList[i][1]);
         }
         saveDayLogByArray(stu_number);
         reserveForm.submit();
@@ -364,7 +355,7 @@ function reserve_cancel() {
         for (var i=0; i<checkbox.length; i++) {
             if (checkbox[i].checked == true) {
                 roomList[reserveList[i][0]][reserveList[i][1]] = 1;
-                saveUserLog('reservation_cancel', stu_name, stu_number, stu_tel, reserveList[i][0], reserveList[i][1]);
+                // saveUserLog('reservation_cancel', stu_name, stu_number, stu_tel, reserveList[i][0], reserveList[i][1]);
             }
         }
     
