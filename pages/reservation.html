@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../src/css/header.css">
     <title>Reservation</title>
 </head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
 <body>
     <div id="header">
         <div data-include-path="./header.html"></div>
@@ -121,21 +122,25 @@
                 <input type="text" name="number" autocomplete="off" required>
                 <span></span>
                 <label>Student number (ex. 19-079)</label>
-
             </div>
     
             <div class="txt_field">
                 <input type="text" name="name" autocomplete="off" required>
                 <span></span>
                 <label>Name</label>
-                
             </div>
     
             <div class="txt_field">
                 <input type="text" name="tel" autocomplete="off" required>
                 <span></span>
                 <label>Phone number (ex. 010-9348-6088)</label>
-                
+            </div>
+
+            
+            <div class="txt_field">
+                <input type="password" name="pw" autocomplete="off" required>
+                <span></span>
+                <label>gaonnuri password</label>
             </div>
 
             <input type="button" onclick="reservation()"  value="예약하기">
