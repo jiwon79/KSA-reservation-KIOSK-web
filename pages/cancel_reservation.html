@@ -1,85 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../src/css/cancel_reservation.css">
-    <link rel="stylesheet" href="../src/css/header.css">
-    <link rel="stylesheet" href="../src/css/modal.css">
-    <link rel="stylesheet" href="../src/css/index.css">
-    <title>Cancel Reservation</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../src/css/cancel_reservation.css">
+  <link rel="stylesheet" href="../src/css/header.css">
+  <link rel="stylesheet" href="../src/css/modal.css">
+  <link rel="stylesheet" href="../src/css/index.css">
+  <title>Cancel Reservation</title>
 </head>
+
 <body>
-    <div id="header">
-        <div data-include-path="./header.html"></div>
-    </div>
+  <div id="header">
+    <div data-include-path="./header.html"></div>
+  </div>
 
-    <div class="center">
-        <h3>Reservation Cancel Page</h3>
-        <span id="stu_number" class="info"></span>
-        <span id="stu_name" class="info"></span>
-        <span id="stu_tel" class="info"></span>
-        <span id="stu_pw" class="info"></span>
+  <div class="center">
+    <h3>Reservation Cancel Page</h3>
+    <span id="stu_number" class="info"></span>
+    <span id="stu_name" class="info"></span>
+    <span id="stu_tel" class="info"></span>
+    <span id="stu_pw" class="info"></span>
 
+    <form name="cancelInputForm" class="checkInputForm" action="" method="GET">
+      <div class="txt_field">
+        <input type="text" name="number" autocomplete="off" required>
+        <span></span>
+        <label>Student number (ex. 19-079)</label>
+      </div>
 
-        <form name="cancelInputForm" class="checkInputForm" action="" method="GET">
-            <div class="txt_field">
-                <input type="text" name="number" autocomplete="off" required>
-                <span></span>
-                <label>Student number (ex. 19-079)</label>
-            </div>
-    
-            <div class="txt_field">
-                <input type="text" name="name" autocomplete="off" required>
-                <span></span>
-                <label>Name</label>
-            </div>
+      <div class="txt_field">
+        <input type="text" name="name" autocomplete="off" required>
+        <span></span>
+        <label>Name</label>
+      </div>
 
-            <div class="txt_field">
-                <input type="text" name="tel" autocomplete="off" required>
-                <span></span>
-                <label>Phone number (ex. 010-9348-6088)</label>
-            </div>
-            
-            <div class="txt_field">
-                <input type="password" name="pw" autocomplete="off" required>
-                <span></span>
-                <label>gaonnuri password</label>
-            </div>
-    
-            <input id="input_button" type="button" onclick="checkbox_load(event)"  value="다음">
-        </form>
+      <div class="txt_field">
+        <input type="text" name="tel" autocomplete="off" required>
+        <span></span>
+        <label>Phone number (ex. 010-9348-6088)</label>
+      </div>
 
-        <form name="cancelForm" class="cancelForm" action="cancel_end.html" method="GET">
-            <ul>
-                <li>
-                    <input type="checkbox" id="time1" name="time" value="1">
-                    <label for="time1">9시</label>
-                </li>
+      <div class="txt_field">
+        <input type="password" name="pw" autocomplete="off" required>
+        <span></span>
+        <label>gaonnuri password</label>
+      </div>
 
-                <li>
-                    <input type="checkbox" id="time2" name="time" value="2">
-                    <label for="time2">10시</label>
-                </li>
+      <input id="input_button" type="button" onclick="checkbox_load(event)" value="다음">
+    </form>
 
-                <li>
-                    <input type="checkbox" id="time3" name="time" value="3">
-                    <label for="time3">11시</label>
-                </li>
-            </ul>
-            <input id="checkbox_button" type="button" onclick="reserve_cancel()"  value="취소하기">
-        </form>
-    </div>
+    <form name="cancelForm" class="cancelForm" action="cancel_end.html" method="GET">
+      <ul>
+        <li>
+          <input type="checkbox" id="time1" name="time" value="1">
+          <label for="time1">9시</label>
+        </li>
 
-    <div id="modal">
-        <div data-include-path="./modal.html"></div>
-    </div>
+        <li>
+          <input type="checkbox" id="time2" name="time" value="2">
+          <label for="time2">10시</label>
+        </li>
 
-    <a href="index.html"><img src="../src/img/home.png" alt="homne-img" class="home-img"></a>
+        <li>
+          <input type="checkbox" id="time3" name="time" value="3">
+          <label for="time3">11시</label>
+        </li>
+      </ul>
+      <input id="checkbox_button" type="button" onclick="reserve_cancel()" value="취소하기">
+    </form>
+  </div>
 
-    <script src="../src/js/loadHTML.js"></script>
-    <script src="../src/js/modal.js"></script>
-    <script src="../src/js/function.js"></script>
-    <script src="../src/js/connectDB.js"></script>
+  <div id="modal">
+    <div data-include-path="./modal.html"></div>
+  </div>
+
+  <a href="index.html"><img src="../src/img/home.png" alt="homne-img" class="home-img"></a>
+
+  <script src="../src/js/loadHTML.js"></script>
+  <script src="../src/js/modal.js"></script>
+  <script src="../src/js/function.js"></script>
+  <script src="../src/js/connectDB.js"></script>
 </body>
+
 </html>

@@ -1,164 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../src/css/reservation.css">
-    <link rel="stylesheet" href="../src/css/index.css">
-    <link rel="stylesheet" href="../src/css/modal.css">
-    <link rel="stylesheet" href="../src/css/header.css">
-    <title>Reservation</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../src/css/reservation.css">
+  <link rel="stylesheet" href="../src/css/index.css">
+  <link rel="stylesheet" href="../src/css/modal.css">
+  <link rel="stylesheet" href="../src/css/header.css">
+  <title>Reservation</title>
 </head>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
 <body>
-    <div id="header">
-        <div data-include-path="./header.html"></div>
-    </div>
+  <div id="header">
+    <div data-include-path="./header.html"></div>
+  </div>
 
-    <div class="center">
-        <h3>현재 예약 상태</h3>
+  <div class="center">
+    <h3>현재 예약 상태</h3>
 
-        <table class="reserveTable">
-            <tr>
-                <td>체크</td>
-                <td>교시</td>
-                <td>시간</td>
-                <td>예약자</td>
-            </tr>
-            <tr onclick="applyCheckbox(0)">
-                <td><input type="checkbox" onclick="changeChecked(0)"></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr onclick="applyCheckbox(1)">
-                <td><input type="checkbox" onclick="changeChecked(1)"></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr onclick="applyCheckbox(2)">
-                <td><input type="checkbox" onclick="changeChecked(2)"></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr onclick="applyCheckbox(3)">
-                <td><input type="checkbox" onclick="changeChecked(3)"></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr onclick="applyCheckbox(4)">
-                <td><input type="checkbox" onclick="changeChecked(4)"></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr onclick="applyCheckbox(5)">
-                <td><input type="checkbox" onclick="changeChecked(5)"></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr onclick="applyCheckbox(6)">
-                <td><input type="checkbox" onclick="changeChecked(6)"></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr onclick="applyCheckbox(7)">
-                <td><input type="checkbox" onclick="changeChecked(7)"></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr onclick="applyCheckbox(8)">
-                <td><input type="checkbox" onclick="changeChecked(8)"></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr onclick="applyCheckbox(9)">
-                <td><input type="checkbox" onclick="changeChecked(9)"></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr onclick="applyCheckbox(10)">
-                <td><input type="checkbox" onclick="changeChecked(10)"></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr onclick="applyCheckbox(11)">
-                <td><input type="checkbox" onclick="changeChecked(11)"></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr onclick="applyCheckbox(12)">
-                <td><input type="checkbox" onclick="changeChecked(12)"></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr onclick="applyCheckbox(13)">
-                <td><input type="checkbox" onclick="changeChecked(13)"></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr onclick="applyCheckbox(14)">
-                <td><input type="checkbox" onclick="changeChecked(14)"></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-        </table>
+    <table class="reserveTable">
+      <tr>
+        <td>체크</td>
+        <td>교시</td>
+        <td>시간</td>
+        <td>예약자</td>
+      </tr>
+      <tr onclick="applyCheckbox(0)">
+        <td><input type="checkbox" onclick="changeChecked(0)"></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr onclick="applyCheckbox(1)">
+        <td><input type="checkbox" onclick="changeChecked(1)"></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr onclick="applyCheckbox(2)">
+        <td><input type="checkbox" onclick="changeChecked(2)"></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr onclick="applyCheckbox(3)">
+        <td><input type="checkbox" onclick="changeChecked(3)"></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr onclick="applyCheckbox(4)">
+        <td><input type="checkbox" onclick="changeChecked(4)"></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr onclick="applyCheckbox(5)">
+        <td><input type="checkbox" onclick="changeChecked(5)"></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr onclick="applyCheckbox(6)">
+        <td><input type="checkbox" onclick="changeChecked(6)"></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr onclick="applyCheckbox(7)">
+        <td><input type="checkbox" onclick="changeChecked(7)"></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr onclick="applyCheckbox(8)">
+        <td><input type="checkbox" onclick="changeChecked(8)"></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr onclick="applyCheckbox(9)">
+        <td><input type="checkbox" onclick="changeChecked(9)"></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr onclick="applyCheckbox(10)">
+        <td><input type="checkbox" onclick="changeChecked(10)"></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr onclick="applyCheckbox(11)">
+        <td><input type="checkbox" onclick="changeChecked(11)"></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr onclick="applyCheckbox(12)">
+        <td><input type="checkbox" onclick="changeChecked(12)"></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr onclick="applyCheckbox(13)">
+        <td><input type="checkbox" onclick="changeChecked(13)"></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr onclick="applyCheckbox(14)">
+        <td><input type="checkbox" onclick="changeChecked(14)"></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </table>
 
-        <form name="reserveForm" action="reserve_end.html" method="GET">
-            <div class="txt_field">
-                <input type="text" name="number" autocomplete="off" required>
-                <span></span>
-                <label>Student number (ex. 19-079)</label>
-            </div>
-    
-            <div class="txt_field">
-                <input type="text" name="name" autocomplete="off" required>
-                <span></span>
-                <label>Name</label>
-            </div>
-    
-            <div class="txt_field">
-                <input type="text" name="tel" autocomplete="off" required>
-                <span></span>
-                <label>Phone number (ex. 010-9348-6088)</label>
-            </div>
+    <form name="reserveForm" action="reserve_end.html" method="GET">
+      <div class="txt_field">
+        <input type="text" name="number" autocomplete="off" required>
+        <span></span>
+        <label>Student number (ex. 19-079)</label>
+      </div>
 
-            
-            <div class="txt_field">
-                <input type="password" name="pw" autocomplete="off" required>
-                <span></span>
-                <label>gaonnuri password</label>
-            </div>
+      <div class="txt_field">
+        <input type="text" name="name" autocomplete="off" required>
+        <span></span>
+        <label>Name</label>
+      </div>
 
-            <input type="button" onclick="reservation()"  value="예약하기">
-        </form>
-    </div>
-    <img class="text" src="../src/img/text6.png" alt="">
+      <div class="txt_field">
+        <input type="text" name="tel" autocomplete="off" required>
+        <span></span>
+        <label>Phone number (ex. 010-9348-6088)</label>
+      </div>
 
-    <div id="modal">
-        <div data-include-path="./modal.html"></div>
-    </div>
 
-    <a href="index.html"><img src="../src/img/home.png" alt="homne-img" class="home-img"></a>
-    
+      <div class="txt_field">
+        <input type="password" name="pw" autocomplete="off" required>
+        <span></span>
+        <label>gaonnuri password</label>
+      </div>
 
-    <script src="../src/js/modal.js"></script>
-    <script src="../src/js/function.js"></script>
-    <script src="../src/js/connectDB.js"></script>
-    <script src="../src/js/reservation.js"></script>
-    <script src="../src/js/loadHTML.js"></script>
+      <input type="button" onclick="reservation()" value="예약하기">
+    </form>
+  </div>
+  <img class="text" src="../src/img/text6.png" alt="">
+
+  <div id="modal">
+    <div data-include-path="./modal.html"></div>
+  </div>
+
+  <a href="index.html"><img src="../src/img/home.png" alt="homne-img" class="home-img"></a>
+
+
+  <script src="../src/js/modal.js"></script>
+  <script src="../src/js/function.js"></script>
+  <script src="../src/js/connectDB.js"></script>
+  <script src="../src/js/reservation.js"></script>
+  <script src="../src/js/loadHTML.js"></script>
 </body>
+
 </html>
