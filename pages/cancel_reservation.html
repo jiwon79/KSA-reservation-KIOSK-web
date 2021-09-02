@@ -19,6 +19,7 @@
         <span id="stu_number" class="info"></span>
         <span id="stu_name" class="info"></span>
         <span id="stu_tel" class="info"></span>
+        <span id="stu_pw" class="info"></span>
 
 
         <form name="cancelInputForm" class="checkInputForm" action="" method="GET">
@@ -38,6 +39,12 @@
                 <input type="text" name="tel" autocomplete="off" required>
                 <span></span>
                 <label>Phone number (ex. 010-9348-6088)</label>
+            </div>
+            
+            <div class="txt_field">
+                <input type="password" name="pw" autocomplete="off" required>
+                <span></span>
+                <label>gaonnuri password</label>
             </div>
     
             <input id="input_button" type="button" onclick="checkbox_load(event)"  value="다음">
@@ -71,6 +78,7 @@
     <a href="index.html"><img src="../src/img/home.png" alt="homne-img" class="home-img"></a>
 
     <script src="../src/js/loadHTML.js"></script>
+    <script src="../src/js/modal.js"></script>
     <script src="../src/js/function.js"></script>
     <script src="../src/js/connectDB.js"></script>
 </body>

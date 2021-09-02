@@ -116,26 +116,7 @@ function createDayLogFile() {
     'e : 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000';
   localStorage['day_log/' + d] = data;
   console.log('create empty day log')
-  // fs.writeFile(textPath, data, function(err) {
-  //     if(err) {
-  //         return console.log(err);
-  //     }
-  //     console.log("create empty day log file");
-  // });
 }
-
-// function createUserLogFile() {
-//     d = getTodayDate();
-//     textPath = rootPath+'/log/user_log/'+d+'.txt';
-//     data = 'current time / stu_number / stu_name / phone number / option / seminar / time';
-
-//     fs.writeFile(textPath, data, function(err) {
-//         if(err) {
-//             return console.log(err);
-//         }
-//         console.log("create empty user log file");
-//     });
-// }
 
 // read text file
 function loadDayLog() {
@@ -226,36 +207,23 @@ function checkMatched(number, name) {
   return false;
 }
 
-// modal 
-function appear_modal(option) {
-  document.querySelector('.modal_wrap').style.display = 'block';
-  document.querySelector('.black_bg').style.display = 'block';
-  var modal = document.querySelector('.modal_content');
-  if (option == 'not_info') modal.innerText = '학번, 이름을 입력해주세요';
-  if (option == 'over_time') modal.innerText = '세미나실을 최대 3시간 이용 가능합니다';
-  if (option == 'not_check_reserve') modal.innerText = '예약할 시간을 선택해 주세요.';
-  if (option == 'not_reserve') modal.innerText = '예약을 하지 않았습니다.';
-  if (option == 'not_checkbox') modal.innerText = '취소할 시간을 선택해주세요';
-  if (option == 'wrong_info') modal.innerText = '학번과 이름을 정확히 입력해주세요';
-  if (option == 'gaonnuri_fail')  modal.innerText = '가온누리 비밀번호를 정확히 입력해주세요';
+async function fetchGaonnuriAuth(id, pw) {
+  var url = 'https://gaonnuri.ksain.net/api/PAuth.php';
+  var data = new FormData();
+  console.log(id, pw)
+  
+  data.append('id', id);
+  data.append('pw', pw);
+  
+  let response = await fetch(url, {
+    method: 'POST', // or 'PUT'
+    body: data,
+  })
+  let result = await response.json();
+  console.log(result);
+  return result;
 }
 
-function close_modal() {
-  document.querySelector('.modal_wrap').style.display = 'none';
-  document.querySelector('.black_bg').style.display = 'none';
-}
-
-// main modal
-function appear_mainModal() {
-  document.querySelector('.mainModal_close').addEventListener('click', close_mainModal);
-  document.querySelector('.mainModal_wrap').style.display = 'block';
-  document.querySelector('.black_bg').style.display = 'block';
-}
-
-function close_mainModal() {
-  document.querySelector('.mainModal_wrap').style.display = 'none';
-  document.querySelector('.black_bg').style.display = 'none';
-}
 
 // reservatoin button
 async function reservation() {
@@ -275,18 +243,9 @@ async function reservation() {
     }
   }
 
-  var url = 'https://gaonnuri.ksain.net/api/PAuth.php';
-  var data = new FormData();
-  var gaonnuri_id = 'ksa'+stu_number.slice(0,2)+'-'+stu_number.slice(3,6);
-  data.append('id', gaonnuri_id);
-  data.append('pw', CryptoJS.MD5(pw));
-  
-  let response = await fetch(url, {
-    method: 'POST', // or 'PUT'
-    body: data,
-  })
-  let result = await response.json();
-  console.log(result);
+  let gaonnuri_id = 'ksa'+stu_number.slice(0,2)+stu_number.slice(3,6);
+  let gaonnuri_pw = CryptoJS.MD5(pw);
+  result = await fetchGaonnuriAuth(gaonnuri_id, gaonnuri_pw);
 
   // if don't input number or name, show modal
   document.querySelector('.modal_close').addEventListener('click', close_modal);
@@ -298,10 +257,9 @@ async function reservation() {
     appear_modal('not_check_reserve');
   } else if (!checkMatched(stu_number, stu_name)) {
     appear_modal('wrong_info');
-  } else if (result.result !== 'SUCCES') {
+  } else if (result.result !== 'SUCCESS') {
     appear_modal('gaonnuri_fail');
   } else {
-
     for (i = 0; i < checkList.length; i++) {
       roomList[checkList[i][0]][checkList[i][1]] = 1;
       // saveUserLog('reservation', stu_name, stu_number, stu_tel, checkList[i][0], checkList[i][1]);
@@ -318,11 +276,13 @@ function checkbox_load(e) {
   var stu_number = form.number.value;
   var stu_name = form.name.value;
   var stu_tel = form.tel.value;
+  var stu_pw = form.pw.value;
   numberValidTest(stu_number);
 
   document.querySelector('#stu_number').innerText = stu_number;
   document.querySelector('#stu_name').innerText = stu_name;
   document.querySelector('#stu_tel').innerText = stu_tel;
+  document.querySelector('#stu_pw').innerText = stu_pw;
   reserveList = reserveTime(stu_number);
   console.log(reserveList);
 
@@ -365,6 +325,7 @@ function reserve_cancel() {
   stu_number = document.querySelector('#stu_number').innerText;
   stu_name = document.querySelector('#stu_name').innerText;
   stu_tel = document.querySelector('#stu_tel').innerText;
+  stu_tel = document.querySelector('#stu_pw').innerText;
 
   reserveList = reserveTime(stu_number);
 
