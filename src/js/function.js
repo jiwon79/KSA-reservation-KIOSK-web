@@ -52,7 +52,7 @@ function applyCheckbox(t) {
   var room = getParameterByName('room');
   var checkbox = document.querySelector('.reserveTable tr:nth-child(' + String(t + 2) + ') td:nth-child(1) input');
 
-  if (roomList[room][t] != '00-000') {
+  if (data_number[room][t] != '00-000') {
     console.log('이미 예약이 됨');
     return;
   }
@@ -77,10 +77,10 @@ function reservationTable() {
     tr.querySelector('td:nth-child(1)').addEventListener("click", function applyCheckbox(i) {});
     tr.querySelector('td:nth-child(2)').innerText = classList[i];
     tr.querySelector('td:nth-child(3)').innerText = timeList[i];
-    if (!roomList[room][i].includes('00-000')) {
+    if (!data_number[room][i].includes('00-000')) {
       // tr.style.color = '#00ff00';
       tr.style.backgroundColor = '#adadad';
-      tr.querySelector('td:nth-child(4)').innerText = roomList[room][i];
+      tr.querySelector('td:nth-child(4)').innerText = data_number[room][i]+'('+data_name[room][i]+')';
     }
   }
   console.log('apply table');
@@ -96,7 +96,7 @@ function overallTable() {
       // query = ".sA td:nth-child(3)"
       var qeury = '.s' + r + ' td:nth-child(' + String(j + 1) + ')';
       table = document.querySelector(qeury);
-      if (!roomList[roomAraay[i]][j].includes('00-000')) {
+      if (!data_number[roomAraay[i]][j].includes('00-000')) {
         table.style.backgroundColor = "#f26336";
         table.style.color = "#ffffff";
       }
@@ -137,38 +137,27 @@ function createDayLogFile() {
 
 // read text file
 function loadDayLog() {
-  d = getTodayDate();
-
-  data = localStorage['day_log/' + d]
-  s = data.split('\n');
-  var i = 0;
-  for (key in roomList) {
-    // a : 0,0,0 => [0,0,0]
-    roomList[key] = s[i].slice(4, ).split(', ');
-    i = i + 1;
-  }
+  data_number = JSON.parse(localStorage['data_number']);
+  data_name = JSON.parse(localStorage['data_name']);
   console.log('load text data');
 }
 
 // if element == 1, change stu_number and save day log file
-function saveDayLogByArray(stu_number) {
+function saveDayLogByArray(stu_number, stu_name) {
   d = getTodayDate();
   data = ''
 
   // if element == 1, change stu_number
-  for (var room in roomList) {
-    for (i = 0; i < roomList[room].length; i++) {
-      if (roomList[room][i] == 1) {
-        roomList[room][i] = stu_number;
+  for (var room in data_number) {
+    for(i=0; i<data_number[room].length; i++) {
+      if (data_number[room][i] == 1) {
+        data_number[room][i] = stu_number;
+        data_name[room][i] = stu_name;
       }
     }
   }
-
-  // save day log file
-  for (key in roomList) {
-    data = data + key + ' : ' + roomList[key].join(', ') + '\n';
-  }
-  localStorage['day_log/' + d] = data;
+  localStorage['data_number'] = JSON.stringify(data_number);
+  localStorage['data_name'] = JSON.stringify(data_name);
   console.log("sace day log")
 }
 
@@ -195,10 +184,10 @@ function saveDayLogByArray(stu_number) {
 // output: 해당 학생이 예약한 시간 리스트
 function reserveTime(stu_number) {
   result = [];
-  for (key in roomList) {
-    for (i = 0; i < roomList[key].length; i++) {
-      if (roomList[key][i] == stu_number) {
-        result.push([key, i]);
+  for (room in data_number) {
+    for (i=0; i<data_number[room].length; i++) {
+      if (data_number[room][i] == stu_number) {
+        result.push([room, i]);
       }
     }
   }
@@ -206,8 +195,8 @@ function reserveTime(stu_number) {
 }
 
 function print() {
-  for (key in roomList) {
-    console.log(key, roomList[key]);
+  for (key in data_number) {
+    console.log(key, data_number[key]);
   }
 }
 
@@ -278,10 +267,12 @@ async function reservation() {
     appear_modal('gaonnuri_fail');
   } else {
     for (i = 0; i < checkList.length; i++) {
-      roomList[checkList[i][0]][checkList[i][1]] = 1;
+      let room = checkList[i][0];
+      let index = checkList[i][1];
+      data_number[room][index] = 1;
       // saveUserLog('reservation', stu_name, stu_number, stu_tel, checkList[i][0], checkList[i][1]);
     }
-    saveDayLogByArray(stu_number);
+    saveDayLogByArray(stu_number, stu_name);
     reserveForm.submit();
   }
 }
@@ -308,10 +299,12 @@ function checkbox_load(e) {
   if (!stu_number || !stu_name) {
     appear_modal('not_info');
     return;
-  } else if (reserveList.length == 0) {
+  }
+  if (reserveList.length == 0) {
     appear_modal('not_reserve')
     return;
-  } else if (!checkMatched(stu_number, stu_name)) {
+  }
+  if (!checkMatched(stu_number, stu_name)) {
     appear_modal('wrong_info');
     return;
   }
@@ -360,12 +353,14 @@ function reserve_cancel() {
   } else {
     for (var i = 0; i < checkbox.length; i++) {
       if (checkbox[i].checked == true) {
-        roomList[reserveList[i][0]][reserveList[i][1]] = 1;
+        let room = reserveList[i][0];
+        let index = reserveList[i][1];
+        data_number[room][index] = 1;
         // saveUserLog('reservation_cancel', stu_name, stu_number, stu_tel, reserveList[i][0], reserveList[i][1]);
       }
     }
 
-    saveDayLogByArray('00-000');
+    saveDayLogByArray('00-000', '-');
     document.cancelForm.submit();
   }
 }
