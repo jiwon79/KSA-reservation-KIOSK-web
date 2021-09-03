@@ -8,16 +8,13 @@ var timeList = Array('8:50 ~ 9:40', '9:40 ~ 10:40', '10:40 ~ 11:40', '11:40 ~ 12
 var classList = Array('1교시', '2교시', '3교시', '4교시', '점심시간', '5교시', '6교시', '7교시', '8교시', '9교시', '저녁시간', '10교시', '11교시', '12교시', '13교시');
 
 d = getTodayDate();
-var dayLog_exists = localStorage['day_log/'+d] !== undefined;
-// var userLog_exists = fs.existsSync(rootPath+'/log/user_log/'+d+'.txt');
-
-// day log file
-if(dayLog_exists){ // if exist file, load day log
-    console.log("exist :",dayLog_exists);
-    loadDayLog();
-} else { // if not exist file, create empty log file
-    console.log("no exists :",dayLog_exists);
-    createDayLogFile();
+if (localStorage['date'] !== d || localStorage['date'] == undefined) {
+  localStorage['date'] = d;
+  createDayLogFile();
+  console.log('create day log data')
+} else {
+  loadDayLog();
+  console.log('load day log data')
 }
 
 // student excel data

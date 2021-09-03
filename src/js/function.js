@@ -109,6 +109,23 @@ function overallTable() {
 function createDayLogFile() {
   d = getTodayDate();
   // textPath = rootPath+'/log/day_log/'+d+'.txt';
+  data_number = {
+    'a': Array(15).fill('00-000'),
+    'b': Array(15).fill('00-000'),
+    'c': Array(15).fill('00-000'),
+    'd': Array(15).fill('00-000'),
+    'e': Array(15).fill('00-000')
+  },
+  data_name = {
+    'a': Array(15).fill('-'),
+    'b': Array(15).fill('-'),
+    'c': Array(15).fill('-'),
+    'd': Array(15).fill('-'),
+    'e': Array(15).fill('-')
+  }
+  localStorage['data_number'] = JSON.stringify(data_number);
+  localStorage['data_name'] = JSON.stringify(data_name);
+
   data = 'a : 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000\n' +
     'b : 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000\n' +
     'c : 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000, 00-000\n' +
