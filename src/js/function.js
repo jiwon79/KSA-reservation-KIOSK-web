@@ -213,13 +213,15 @@ function checkMatched(number, name) {
   return false;
 }
 
-async function fetchGaonnuriAuth(id, pw) {
+async function fetchGaonnuriAuth(stu_number, pw) {
   var url = 'https://gaonnuri.ksain.net/api/PAuth.php';
   var data = new FormData();
-  console.log(id, pw)
+  let gaonnuri_id = 'ksa'+stu_number.slice(0,2)+stu_number.slice(3,6);
+  let gaonnuri_pw = CryptoJS.MD5(pw);
+  console.log(gaonnuri_id, gaonnuri_pw)
   
-  data.append('id', id);
-  data.append('pw', pw);
+  data.append('id', gaonnuri_id);
+  data.append('pw', gaonnuri_pw);
   
   let response = await fetch(url, {
     method: 'POST', // or 'PUT'
@@ -237,7 +239,7 @@ async function reservation() {
   var stu_number = reserveForm.number.value;
   var stu_name = reserveForm.name.value;
   var stu_tel = reserveForm.tel.value;
-  var pw = reserveForm.pw.value;
+  var stu_pw = reserveForm.pw.value;
   var room = getParameterByName('room');
   var checkList = [];
   reserveList = reserveTime(stu_number);
@@ -249,47 +251,53 @@ async function reservation() {
     }
   }
 
-  let gaonnuri_id = 'ksa'+stu_number.slice(0,2)+stu_number.slice(3,6);
-  let gaonnuri_pw = CryptoJS.MD5(pw);
-  result = await fetchGaonnuriAuth(gaonnuri_id, gaonnuri_pw);
-
   // if don't input number or name, show modal
   document.querySelector('.modal_close').addEventListener('click', close_modal);
   if (!stu_number || !stu_name) {
-    appear_modal('not_info');
-  } else if (checkList.length + reserveList.length > 3) {
-    appear_modal('over_time');
-  } else if (!checkList.length) {
-    appear_modal('not_check_reserve');
-  } else if (!checkMatched(stu_number, stu_name)) {
-    appear_modal('wrong_info');
-  } else if (result.result !== 'SUCCESS') {
-    appear_modal('gaonnuri_fail');
-  } else {
-    for (i = 0; i < checkList.length; i++) {
-      let room = checkList[i][0];
-      let index = checkList[i][1];
-      data_number[room][index] = 1;
-      // saveUserLog('reservation', stu_name, stu_number, stu_tel, checkList[i][0], checkList[i][1]);
-    }
-    saveDayLogByArray(stu_number, stu_name);
-    reserveForm.submit();
+    appear_modal('not_info'); 
+    return;
   }
+  if (!checkList.length) {
+    appear_modal('not_check_reserve');  
+    return;
+  } 
+
+  if (stu_number != 'teacher' || pw != 'teacher1234') {
+    if (checkList.length + reserveList.length > 3) {
+      appear_modal('over_time');
+      return;
+    }
+    if (!checkMatched(stu_number, stu_name)) {
+      appear_modal('wrong_info');
+      return;
+    }
+    result = await fetchGaonnuriAuth(stu_number, stu_pw);
+    if (result.result !== 'SUCCESS') {
+      appear_modal('gaonnuri_fail');
+      return;
+    }
+  }
+  for (i = 0; i < checkList.length; i++) {
+    let room = checkList[i][0];
+    let index = checkList[i][1];
+    data_number[room][index] = 1;
+    // saveUserLog('reservation', stu_name, stu_number, stu_tel, checkList[i][0], checkList[i][1]);
+  }
+  saveDayLogByArray(stu_number, stu_name);
+  reserveForm.submit();
 }
 
 
 // cancel reservation functions
-function checkbox_load(e) {
+async function checkbox_load(e) {
   var form = document.cancelInputForm;
   var stu_number = form.number.value;
   var stu_name = form.name.value;
-  var stu_tel = form.tel.value;
   var stu_pw = form.pw.value;
   numberValidTest(stu_number);
 
   document.querySelector('#stu_number').innerText = stu_number;
   document.querySelector('#stu_name').innerText = stu_name;
-  document.querySelector('#stu_tel').innerText = stu_tel;
   document.querySelector('#stu_pw').innerText = stu_pw;
   reserveList = reserveTime(stu_number);
   console.log(reserveList);
@@ -304,9 +312,16 @@ function checkbox_load(e) {
     appear_modal('not_reserve')
     return;
   }
-  if (!checkMatched(stu_number, stu_name)) {
-    appear_modal('wrong_info');
-    return;
+  if (stu_number != 'teacher' || stu_pw != 'teacher1234') {
+    if (!checkMatched(stu_number, stu_name)) {
+      appear_modal('wrong_info');
+      return;
+    }
+    result = await fetchGaonnuriAuth(stu_number, stu_pw);
+    if (result.result != 'SUCCESS') {
+      appear_modal('gaonnuri_fail');
+      return;
+    }
   }
   e.preventDefault();
   // form.submit();
@@ -334,8 +349,7 @@ function reserve_cancel() {
 
   stu_number = document.querySelector('#stu_number').innerText;
   stu_name = document.querySelector('#stu_name').innerText;
-  stu_tel = document.querySelector('#stu_tel').innerText;
-  stu_tel = document.querySelector('#stu_pw').innerText;
+  stu_pw = document.querySelector('#stu_pw').innerText;
 
   reserveList = reserveTime(stu_number);
 

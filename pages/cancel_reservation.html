@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="../src/css/index.css">
   <title>Cancel Reservation</title>
 </head>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
 <body>
   <div id="header">
     <div data-include-path="./header.html"></div>
@@ -19,7 +19,6 @@
     <h3>Reservation Cancel Page</h3>
     <span id="stu_number" class="info"></span>
     <span id="stu_name" class="info"></span>
-    <span id="stu_tel" class="info"></span>
     <span id="stu_pw" class="info"></span>
 
     <form name="cancelInputForm" class="checkInputForm" action="" method="GET">
@@ -33,12 +32,6 @@
         <input type="text" name="name" autocomplete="off" required>
         <span></span>
         <label>Name</label>
-      </div>
-
-      <div class="txt_field">
-        <input type="text" name="tel" autocomplete="off" required>
-        <span></span>
-        <label>Phone number (ex. 010-9348-6088)</label>
       </div>
 
       <div class="txt_field">
