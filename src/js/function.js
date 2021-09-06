@@ -262,7 +262,7 @@ async function reservation() {
     return;
   } 
 
-  if (stu_number != 'teacher' || pw != 'teacher1234') {
+  if (stu_number != 'teacher' || stu_pw != 'teacher1234') {
     if (checkList.length + reserveList.length > 3) {
       appear_modal('over_time');
       return;
