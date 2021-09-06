@@ -1,35 +1,7 @@
 /* font */
 @font-face {
-    font-family: 'SpoqaHanSansNeo-Thin';
-    src: url('./../font/SpoqaHanSansNeo-Thin.otf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'SpoqaHanSansNeo-Regular';
-    src: url('./../font/SpoqaHanSansNeo-Regular.otf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'SpoqaHanSansNeo-Medium';
-    src: url('./../font/SpoqaHanSansNeo-Medium.otf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
     font-family: 'SpoqaHanSansNeo-Light';
     src: url('./../font/SpoqaHanSansNeo-Light.otf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'SpoqaHanSansNeo-Bold';
-    src: url('./../font/SpoqaHanSansNeo-Bold.otf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
