@@ -16,3 +16,18 @@ async function fetchGaonnuriAuth(stu_number, pw) {
   console.log(result);
   return result;
 }
+
+async function updateTodayLog() {
+  var name = localStorage['data_name'];
+  var number = localStorage['data_number'];
+
+  fetch('http://127.0.0.1:3000/log/seminar', {
+    method: 'put',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({'name': name, 'number': number}),
+  })
+  .then(res => res.json())
+  .then(data => console.log(data));
+}
