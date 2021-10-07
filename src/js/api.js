@@ -31,3 +31,10 @@ async function updateTodayLog() {
   .then(res => res.json())
   .then(data => console.log(data));
 }
+
+async function getTodayLog() {
+  let fetchData = await fetch('http://127.0.0.1:3000/log/seminar');
+  let reserverData = await fetchData.json();
+
+  return reserverData;
+}
