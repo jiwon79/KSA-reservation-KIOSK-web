@@ -257,6 +257,7 @@ async function reservation() {
     // saveUserLog('reservation', stu_name, stu_number, stu_tel, checkList[i][0], checkList[i][1]);
   }
   saveDayLogByArray(stu_number, stu_name);
+  await updateTodayLog();
   reserveForm.submit();
 }
 
@@ -316,7 +317,7 @@ async function checkbox_load(e) {
   }
 }
 
-function reserve_cancel() {
+async function reserve_cancel() {
   var checkbox = document.getElementsByName("time");
   var isCheck = false;
 
@@ -348,6 +349,7 @@ function reserve_cancel() {
     }
 
     saveDayLogByArray('00-000', '-');
+    await updateTodayLog();
     document.cancelForm.submit();
   }
 }
