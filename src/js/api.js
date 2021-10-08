@@ -1,3 +1,6 @@
+const option = 'develop' // product or develop
+const BASE_URL = option == 'product' ? 'https://ksa-seminar-res-backend.herokuapp.com/' : 'http://127.0.0.1:3000/';
+
 async function fetchGaonnuriAuth(stu_number, pw) {
   var url = 'https://gaonnuri.ksain.net/api/PAuth.php';
   var data = new FormData();
@@ -21,7 +24,7 @@ async function updateTodayLog() {
   var name = localStorage['data_name'];
   var number = localStorage['data_number'];
 
-  fetch('http://127.0.0.1:3000/log/seminar', {
+  let result = await fetch(BASE_URL+'log/seminar', {
     method: 'put',
     headers: {
       'Content-Type': 'application/json',
@@ -29,11 +32,15 @@ async function updateTodayLog() {
     body: JSON.stringify({'name': name, 'number': number}),
   })
   .then(res => res.json())
-  .then(data => console.log(data));
+  .then(data => {
+    return data
+  });
+
+  return result;
 }
 
 async function getTodayLog() {
-  let fetchData = await fetch('http://127.0.0.1:3000/log/seminar');
+  let fetchData = await fetch(BASE_URL+'log/seminar');
   let reserverData = await fetchData.json();
 
   return reserverData;
