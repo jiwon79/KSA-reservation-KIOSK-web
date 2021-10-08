@@ -107,8 +107,6 @@ function overallTable() {
 
 // create text file
 function createDayLogFile() {
-  d = getTodayDate();
-  // textPath = rootPath+'/log/day_log/'+d+'.txt';
   data_number = {
     'a': Array(15).fill('00-000'),
     'b': Array(15).fill('00-000'),
@@ -137,9 +135,6 @@ function loadDayLog() {
 
 // if element == 1, change stu_number and save day log file
 function saveDayLogByArray(stu_number, stu_name) {
-  d = getTodayDate();
-  data = ''
-
   // if element == 1, change stu_number
   for (var room in data_number) {
     for(i=0; i<data_number[room].length; i++) {
@@ -151,28 +146,8 @@ function saveDayLogByArray(stu_number, stu_name) {
   }
   localStorage['data_number'] = JSON.stringify(data_number);
   localStorage['data_name'] = JSON.stringify(data_name);
-  console.log("sace day log")
+  console.log("save day log")
 }
-
-// function saveUserLog(option, name, number, tel, room, time) {
-//     d = getTodayDate();
-//     textPath = rootPath+'/log/user_log/'+d+'.txt';
-//     data = fs.readFileSync(textPath, {encoding: 'utf8'});
-
-//     let today = new Date();   
-//     let hours = today.getHours(); // 시
-//     let minutes = today.getMinutes();  // 분
-//     let seconds = today.getSeconds();  // 초
-
-//     data = data + '\n' + hours + ':' + minutes + ':' + seconds;
-//     data = data + ' ' + number + ' ' + name + ' ' + tel;
-//     data = data + ' ' + option + ' ' + room + ' ' + time;
-//     fs.writeFileSync(textPath, data, function(err) {
-//         if(err) {
-//             return console.log(err);
-//         }
-//     });
-// }
 
 // output: 해당 학생이 예약한 시간 리스트
 function reserveTime(stu_number) {
@@ -254,13 +229,13 @@ async function reservation() {
     let room = checkList[i][0];
     let index = checkList[i][1];
     data_number[room][index] = 1;
-    // saveUserLog('reservation', stu_name, stu_number, stu_tel, checkList[i][0], checkList[i][1]);
+    saveUserLog('reservation', stu_name, stu_number, stu_tel, checkList[i][0], checkList[i][1]);
   }
   saveDayLogByArray(stu_number, stu_name);
-  await updateTodayLog();
+  var result = await updateTodayLog();
+  console.log('result', result);
   reserveForm.submit();
 }
-
 
 // cancel reservation functions
 async function checkbox_load(e) {
@@ -324,6 +299,7 @@ async function reserve_cancel() {
   stu_number = document.querySelector('#stu_number').innerText;
   stu_name = document.querySelector('#stu_name').innerText;
   stu_pw = document.querySelector('#stu_pw').innerText;
+  stu_tel = '010-0000-0000';
 
   reserveList = reserveTime(stu_number);
 
@@ -344,7 +320,7 @@ async function reserve_cancel() {
         let room = reserveList[i][0];
         let index = reserveList[i][1];
         data_number[room][index] = 1;
-        // saveUserLog('reservation_cancel', stu_name, stu_number, stu_tel, reserveList[i][0], reserveList[i][1]);
+        saveUserLog('reservation_cancel', stu_name, stu_number, stu_tel, reserveList[i][0], reserveList[i][1]);
       }
     }
 

@@ -45,3 +45,22 @@ async function getTodayLog() {
 
   return reserverData;
 }
+
+async function saveUserLog(option, name, number, tel, room, time) {
+  let fetchData = await fetch(BASE_URL+'log/user', {
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      'option': option, 
+      'name': name, 
+      'number': number, 
+      'tel': tel, 
+      'room': room,
+      'time': time
+    })
+  });
+  let userLogData = await fetchData.json();
+  console.log(userLogData);
+}
