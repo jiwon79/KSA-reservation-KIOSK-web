@@ -1,4 +1,4 @@
-const option = 'develop' // product or develop
+const option = 'product' // product or develop
 const BASE_URL = option == 'product' ? 'https://ksa-seminar-res-backend.herokuapp.com/' : 'http://127.0.0.1:3000/';
 
 async function fetchGaonnuriAuth(stu_number, pw) {
